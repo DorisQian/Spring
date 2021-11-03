@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+    <!--    静态工厂构造-->
+    <!--        <bean id="userDao" class="com.doris.factory.StaticFactory" factory-method="getUserDao"></bean>-->
+    <!--        动态工厂构造-->
+    <!--        <bean id="factory" class="com.doris.factory.DynamicFactory" ></bean>-->
+    <!--        <bean id="userDao" factory-bean="factory" factory-method="getUserDao"></bean>-->
+    <!--无参构造-->
+<!--    <bean id="userDao" class="com.doris.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy">-->
+<!--&lt;!&ndash;       普通 属性注入&ndash;&gt;-->
+<!--        <property name="username" value="zhangsan"></property>-->
+<!--        <property name="age" value="12"></property>-->
+<!--    </bean>-->
+    <bean id="userDao" class="com.doris.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy">
+        <!--      集合等  属性注入-->
+        <property name="strList">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+                <value>ccc</value>
+            </list>
+        </property>
+        <property name="userMap">
+            <map>
+<!--                key 是map的key value是map的value-->
+                <entry key="u1" value-ref="user1"></entry>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="p1">ppp1</prop>
+                <prop key="p2">ppp2</prop>
+            </props>
+        </property>
+    </bean>
 
-    <bean id="userDao" class="com.doris.dao.impl.UserDaoImpl" scope="prototype"></bean>
+<!--    <bean id="userService" class="com.doris.service.impl.UserServiceImpl">-->
+<!--    对象注入    name是set方法的名字，set后面的setUserDao ref是对象的引用 即 上面的xml创建的对象，id-->
+<!--        <property name="userDao" ref="userDao"></property>-->
+<!--    </bean>-->
+    <!--        上面引用了p的命名空间，可简写，不用子标签 上面子标签更常用-->
 
+<!--    <bean id="userService" class="com.doris.service.impl.UserServiceImpl" p:userDao-ref="userDao"></bean>-->
+<!--    有参构造 name是参数名-->
+    <bean id="userService" class="com.doris.service.impl.UserServiceImpl">
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>
+    <bean id="user1" class="com.doris.domain.User">
+        <property name="name" value="lisi"></property>
+        <property name="addr" value="beijing"></property>
+    </bean>
 </beans>
