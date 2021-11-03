@@ -52,4 +52,6 @@
         <property name="name" value="lisi"></property>
         <property name="addr" value="beijing"></property>
     </bean>
+<!--    分模块开发-->
+    <import resource="applicationContext-user.xml"/>
 </beans>
