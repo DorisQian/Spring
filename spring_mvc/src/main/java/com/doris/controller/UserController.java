@@ -7,11 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -251,4 +253,40 @@ public class UserController {
     public void save21(@CookieValue("JSESSIONID") String cookie){
         System.out.println(cookie);
     }
+
+    /**
+     * 文件上传
+     * 配置<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     */
+    @ResponseBody
+    @RequestMapping("/quick22")
+    public void save22(String name, MultipartFile uploadFile){
+        System.out.println(name);
+        //获取文件名称
+        String filename = uploadFile.getOriginalFilename();
+        try {
+            uploadFile.transferTo(new File("/Users/doris/Downloads/upload/" + filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 多文件上传
+     */
+    @ResponseBody
+    @RequestMapping("/quick23")
+    public void save23(String name, MultipartFile[] uploadFile){
+        System.out.println(name);
+        for (MultipartFile file : uploadFile) {
+            String filename = file.getOriginalFilename();
+            try {
+                file.transferTo(new File("/Users/doris/Downloads/upload/" + filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }
