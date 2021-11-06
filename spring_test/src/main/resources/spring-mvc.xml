@@ -22,7 +22,7 @@
     <mvc:default-servlet-handler/>
 
     <!--4、组件扫描  扫描Controller-->
-    <context:component-scan base-package="com.doris.controller"/>
+    <context:component-scan base-package="com.doris"/>
 
     <!--5、配置拦截器-->
     <mvc:interceptors>
@@ -37,8 +37,23 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/show"/>
             <bean class="com.doris.interceptor.PrivilegeInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!--6、异常处理器-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="/500"/>
+        <property name="exceptionMappings">
+            <map>
+                <entry key="ClassCastException" value="/403"/>
+                <entry key="MyException" value="/404"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--自定义异常处理器 -->
+<!--    <bean class="com.doris.exception.MyExceptionResolver"/>-->
 
 </beans>
