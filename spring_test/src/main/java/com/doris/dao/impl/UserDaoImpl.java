@@ -2,6 +2,7 @@ package com.doris.dao.impl;
 
 import com.doris.dao.UserDao;
 import com.doris.domain.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -55,5 +56,10 @@ public class UserDaoImpl implements UserDao {
         String sql = "delete from sys_user where id=?";
         template.update(sqlRelate, userId);
         template.update(sql, userId);
+    }
+
+    public User login(String username, String password) throws EmptyResultDataAccessException {
+        String sql = "select * from sys_user where username=? and password=?";
+        return template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);
     }
 }

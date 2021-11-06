@@ -24,4 +24,21 @@
     <!--4、组件扫描  扫描Controller-->
     <context:component-scan base-package="com.doris.controller"/>
 
+    <!--5、配置拦截器-->
+    <mvc:interceptors>
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="com.doris.interceptor.MyInterceptor1"/>-->
+<!--        </mvc:interceptor>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="com.doris.interceptor.MyInterceptor2"/>-->
+<!--        </mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="com.doris.interceptor.PrivilegeInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

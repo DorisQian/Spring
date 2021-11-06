@@ -13,4 +13,6 @@ public interface UserDao {
     public void addRelate(Long userID, Long roleId);
 
     public void delete(Long userId);
+
+    User login(String username, String password);
 }

@@ -5,6 +5,7 @@ import com.doris.dao.UserDao;
 import com.doris.domain.Role;
 import com.doris.domain.User;
 import com.doris.service.UserService;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
@@ -39,5 +40,14 @@ public class UserServiceImpl implements UserService {
 
     public void delete(Long userId) {
         userDao.delete(userId);
+    }
+
+    public User login(String username, String password) {
+        try{
+            return userDao.login(username, password);
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+
     }
 }
