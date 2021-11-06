@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -60,6 +61,13 @@
 	href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
 </head>
 
+<script>
+	function del(userId){
+		if(confirm("您确认要删除吗？")){
+			location = "${pageContext.request.contextPath}/user/delete?userId=" + userId;
+		}
+	}
+</script>
 <body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
@@ -84,7 +92,7 @@
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
+					href="${pageContext.request.contextPath}/user/list">用户管理</a></li>
 
 				<li class="active">全部用户</li>
 			</ol>
@@ -107,7 +115,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='${pageContext.request.contextPath}/pages/user-add.jsp'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='${pageContext.request.contextPath}/user/addUI'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -143,31 +151,23 @@
 									</tr>
 								</thead>
 								<tbody>
-
+									<c:forEach items="${userList}" var="user">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
-											<td>1</td>
-											<td>张三</td>
-											<td>zhangsan@itcast.cn</td>
-											<td>13888888888</td>
+											<td>${user.id}</td>
+											<td>${user.username}</td>
+											<td>${user.email}</td>
+											<td>${user.phoneNum}</td>
 											<td class="text-center">
-												课程研究员&nbsp;讲师&nbsp;
+												<c:forEach items="${user.roleList}" var="role">
+													${role.roleName}
+												</c:forEach>
 											</td>
 											<td class="text-center">
-												<a href="javascript:void(0);" class="btn bg-olive btn-xs">删除</a>
+												<a href="javascript:void(0);" class="btn bg-olive btn-xs" onclick="del(${user.id})">删除</a>
 											</td>
 										</tr>
-
-                                        <tr>
-                                            <td><input name="ids" type="checkbox"></td>
-                                            <td>2</td>
-                                            <td>李四</td>
-                                            <td>lisi@itcast.cn</td>
-                                            <td>13999999999</td>
-                                            <td class="text-center">
-                                                讲师&nbsp;
-                                            </td>
-                                        </tr>
+									</c:forEach>
 
 								</tbody>
 

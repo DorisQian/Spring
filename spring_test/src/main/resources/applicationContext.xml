@@ -24,26 +24,26 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-<!--    &lt;!&ndash;配置RoleService&ndash;&gt;-->
-<!--    <bean id="roleService" class="com.doris.service.impl.RoleServiceImpl">-->
-<!--        <property name="roleDao" ref="roleDao"/>-->
-<!--    </bean>-->
+    <!--配置RoleService-->
+    <bean id="roleService" class="com.doris.service.impl.RoleServiceImpl">
+        <property name="roleDao" ref="roleDao"/>
+    </bean>
 
-<!--    &lt;!&ndash;配置RoleDao&ndash;&gt;-->
-<!--    <bean id="roleDao" class="com.doris.dao.impl.RoleDaoImpl">-->
-<!--        <property name="jdbcTemplate" ref="jdbcTemplate"/>-->
-<!--    </bean>-->
+    <!--配置RoleDao-->
+    <bean id="roleDao" class="com.doris.dao.impl.RoleDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
 
-<!--    &lt;!&ndash;配置UserService&ndash;&gt;-->
-<!--    <bean id="userService" class="com.doris.service.impl.UserServiceImpl">-->
-<!--        <property name="userDao" ref="userDao"/>-->
-<!--        <property name="roleDao" ref="roleDao"/>-->
-<!--    </bean>-->
+    <!--配置UserService-->
+    <bean id="userService" class="com.doris.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+        <property name="roleDao" ref="roleDao"/>
+    </bean>
 
-<!--    &lt;!&ndash;配置UserDao&ndash;&gt;-->
-<!--    <bean id="userDao" class="com.doris.dao.impl.UserDaoImpl">-->
-<!--        <property name="jdbcTemplate" ref="jdbcTemplate"/>-->
-<!--    </bean>-->
+    <!--配置UserDao-->
+    <bean id="userDao" class="com.doris.dao.impl.UserDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
 
 
 </beans>

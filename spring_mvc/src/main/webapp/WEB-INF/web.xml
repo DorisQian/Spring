@@ -39,7 +39,7 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
-    <!-- 配置监听器 有了springmvc后就用不到了，配置DispatcherServlet即可-->
+    <!-- 配置监听器-->
     <listener>
 <!--        <listener-class>com.doris.listener.ContextLoaderListener</listener-class>-->
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
