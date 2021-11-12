@@ -8,4 +8,7 @@
     <select id="findById" parameterType="int" resultType="user">
         select * from user1 where id=#{id}
     </select>
+    <select id="findAll" resultType="user">
+        select * from user1
+    </select>
 </mapper>
