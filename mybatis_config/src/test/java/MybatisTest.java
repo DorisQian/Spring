@@ -1,4 +1,6 @@
+import com.doris.domain.Order;
 import com.doris.domain.User;
+import com.doris.mapper.OrderMapper;
 import com.doris.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -14,23 +16,24 @@ import java.util.Date;
 import java.util.List;
 
 public class MybatisTest {
-    @Test
-    public void testInsert() throws IOException {
-        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-
-        User user = new User();
-        user.setUsername("test4");
-        user.setPassword("123456");
-        user.setBirthday(new Date());
-
-        mapper.save(user);
-
-        sqlSession.commit();
-        sqlSession.close();
-    }
+//    order前的查询，User中没有映射order 用db1库
+//    @Test
+//    public void testInsert() throws IOException {
+//        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+//
+//        User user = new User();
+//        user.setUsername("test4");
+//        user.setPassword("123456");
+//        user.setBirthday(new Date());
+//
+//        mapper.save(user);
+//
+//        sqlSession.commit();
+//        sqlSession.close();
+//    }
 
     @Test
     public void testFindById() throws IOException {
@@ -69,6 +72,55 @@ public class MybatisTest {
         System.out.println("下一页 " + pageInfo.getNextPage());
         System.out.println("是否第一页 " + pageInfo.isIsFirstPage());
         System.out.println("是否最后一页 " + pageInfo.isIsLastPage());
+        sqlSession.close();
+    }
+
+    //一对多
+    @Test
+    public void testFindAllOrder() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+
+        List<Order> orders = mapper.findAll();
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+
+
+        sqlSession.close();
+    }
+
+    //多对一
+    @Test
+    public void testFindD2o () throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        List<User> users = mapper.findAll2();
+        for (User user : users) {
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
+
+    //多对多 用spring_test库
+    @Test
+    public void testFindD2d () throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        List<User> users = mapper.findUserAndRole();
+        for (User user : users) {
+            System.out.println(user);
+        }
+
         sqlSession.close();
     }
 }

@@ -1,12 +1,32 @@
 package com.doris.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private int id;
     private String username;
     private String password;
-    private Date birthday;
+//    private Date birthday;
+//    private List<Order> orders;
+    private List<Role> roleList;
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+//    public List<Order> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(List<Order> orders) {
+//        this.orders = orders;
+//    }
+//
 
     public int getId() {
         return id;
@@ -32,13 +52,25 @@ public class User {
         this.password = password;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
+//    public Date getBirthday() {
+//        return birthday;
+//    }
+//
+//    public void setBirthday(Date birthday) {
+//        this.birthday = birthday;
+//    }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", username='" + username + '\'' +
+//                ", password='" + password + '\'' +
+//                ", birthday=" + birthday +
+//                ", orders=" + orders +
+//                '}';
+//    }
+
 
     @Override
     public String toString() {
@@ -46,7 +78,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", birthday=" + birthday +
+                ", roleList=" + roleList +
                 '}';
     }
 }

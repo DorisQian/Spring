@@ -7,6 +7,8 @@
     <!--    定义别名-->
     <typeAliases>
         <typeAlias type="com.doris.domain.User" alias="user"/>
+        <typeAlias type="com.doris.domain.Order" alias="order"/>
+        <typeAlias type="com.doris.domain.Role" alias="role"/>
     </typeAliases>
 
 <!--    注册类型处理器-->
@@ -34,6 +36,8 @@
 <!--    加载映射文件-->
     <mappers>
         <mapper resource="com.doris.mapper/UserMapper.xml"/>
+<!--        多对多报错先注释-->
+<!--        <mapper resource="com.doris.mapper/OrderMapper.xml"/>-->
     </mappers>
 
 </configuration>
