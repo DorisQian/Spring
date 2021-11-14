@@ -1,0 +1,8 @@
+server:
+  port: 82
+
+# 引用
+baseDir: /usr/
+tempDir: ${basedir}/local
+# 转义 /t生效
+temp: "${basedir}/temp"

@@ -1,0 +1,23 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+
+# 集成mybatis
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_test?serverTimezone=UTC
+    username: root
+    password: 123456
+
+# 只读取一部分数据
+# 创建类，用于封装数据
+# 由spring加载数据到对象，一定要告诉spring加载这些信息
+# 使用时从spring中直接获取信息使用
+
+datasource:
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql//localhost/spring_test
+  username: root
+  password: 123456
